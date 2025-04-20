@@ -1,4 +1,4 @@
-mport streamlit as st
+import streamlit as st
 from utils import lade_daten, berechne_haeufigkeit, generiere_prognose
 
 st.title("Harrys Lotto Prognose")
