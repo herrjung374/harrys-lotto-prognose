@@ -15,7 +15,7 @@ def lade_daten(datei=None):
         except:
             return []
 
-    ziehungen = []
+    ziehungen = [datum]
     for _, row in df.iterrows():
         try:
             haupt = [int(row[f"Zahl{i}"]) for i in range(1, 6)]
