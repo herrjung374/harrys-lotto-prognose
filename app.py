@@ -23,15 +23,21 @@ elif quelle == "Eigene CSV hochladen":
 
 # Analyse und Prognose
 if ziehungen:
-    haupt_counter, euro_counter = berechne_haeufigkeit(ziehungen)
+    st.success("Ziehungen erfolgreich geladen!")
 
-    st.subheader("Häufigste Hauptzahlen")
-    st.write(haupt_counter.most_common(10))
+    # --- Zusätzliche Auswahlmöglichkeiten ---
+    st.subheader("Daten filtern")
+    anzahl = st.slider("Wie viele Ziehungen berücksichtigen?", min_value=10, max_value=len(ziehungen), value=50)
 
-    st.subheader("Häufigste Eurozahlen")
-    st.write(euro_counter.most_common(5))
+    gefiltert = ziehungen[-anzahl:]
+    haupt_counter, euro_counter = berechne_haeufigkeit(gefiltert)
+
+    # --- Prognose-Methode ---
+    st.subheader("Prognose-Modus wählen")
+    modus = st.selectbox("Welche Strategie soll verwendet werden?", ["Gewichtet", "Häufig & Selten kombiniert"])
+
+    prognose = generiere_prognose(haupt_counter, euro_counter, modus=modus)
 
     st.subheader("Prognose")
-    prognose = generiere_prognose(haupt_counter, euro_counter)
-    st.write("**Hauptzahlen:**", prognose['haupt'])
-    st.write("**Eurozahlen:**", prognose['euro'])
+    st.write("**Hauptzahlen:**", prognose["haupt"])
+    st.write("**Eurozahlen:**", prognose["euro"])
