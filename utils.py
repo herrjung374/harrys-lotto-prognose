@@ -11,7 +11,7 @@ def lade_daten(datei=None):
         except UnicodeDecodeError:
             df = pd.read_csv(datei, sep=";", encoding="latin-1")
     else:
-        url = "https://www.lottozahlenonline.de/eurojackpot/gewinnzahlen.csv"
+        url = "https://lotto-datenbank.de/euro_jackpot_absteigend.csv"
         content = requests.get(url).content.decode("latin-1")
         df = pd.read_csv(StringIO(content), sep=";", encoding="latin-1")
 
